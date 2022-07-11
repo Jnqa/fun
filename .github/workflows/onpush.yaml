@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - main
+      - dev
     
 jobs:
   push_to_registry:
