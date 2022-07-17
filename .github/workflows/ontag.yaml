@@ -4,9 +4,6 @@ on:
     tags:
       - 'v*'
 
-env:
-  JQ_HOST: "api.jnqa.fun"
-
 jobs:
   # build-github:
   #   runs-on: ubuntu-latest
@@ -93,8 +90,11 @@ jobs:
           echo "Just run:"
           echo "docker run -p 4701:3000 ${{ env.ACTOR }}/${{ env.REPONAME }}:${{ env.VERSION }}"
       
-      - name: Update Service on host
-        run: |
-          uri=$(curl -u ${{ secrets.JQ_USERNAME }}:${{ secrets.JQ_PASSWORD }} http://${{ env.JQ_HOST }}/api/containers | jq -r '.[] | .[] | select(."name"=="jq-${{ env.REPONAME }}") | .uri')
-          curl -u ${{ secrets.JQ_USERNAME }}:${{ secrets.JQ_PASSWORD }} -i -H "Content-Type: application/json" -X PUT -d '{"version":"${{ env.VERSION }}"}' $uri
-
+      - name: Update Service
+        uses: Jnqa/docker-updater@v0.1.7
+        with:
+          DU_USERNAME: ${{ secrets.JQ_USERNAME }}
+          DU_PASSWORD: ${{ secrets.JQ_PASSWORD }}
+          DU_HOST: api.jnqa.fun
+          VERSION: ${{ env.VERSION }}
+          CONTAINER_PREFIX: jq-
