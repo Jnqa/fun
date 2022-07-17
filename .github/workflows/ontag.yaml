@@ -95,6 +95,6 @@ jobs:
       
       - name: Update Service on host
         run: |
-          uri=$(curl -u ${{ secrets.JQ_USERNAME }}:${{ secrets.JQ_PASSWORD }} http://${{ env.JQ_HOST }}/api/containers | jq -r '.[] | .[] | select(."name"=="${{ env.REPONAME }}") | .uri')
+          uri=$(curl -u ${{ secrets.JQ_USERNAME }}:${{ secrets.JQ_PASSWORD }} http://${{ env.JQ_HOST }}/api/containers | jq -r '.[] | .[] | select(."name"=="jq-${{ env.REPONAME }}") | .uri')
           curl -u ${{ secrets.JQ_USERNAME }}:${{ secrets.JQ_PASSWORD }} -i -H "Content-Type: application/json" -X PUT -d '{"version":"${{ env.VERSION }}"}' $uri
 
