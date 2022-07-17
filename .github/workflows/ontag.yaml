@@ -91,7 +91,7 @@ jobs:
           echo "docker run -p 4701:3000 ${{ env.ACTOR }}/${{ env.REPONAME }}:${{ env.VERSION }}"
       
       - name: Update Service
-        uses: Jnqa/docker-updater@v0.1.7
+        uses: Jnqa/docker-updater@action
         with:
           DU_USERNAME: ${{ secrets.JQ_USERNAME }}
           DU_PASSWORD: ${{ secrets.JQ_PASSWORD }}
