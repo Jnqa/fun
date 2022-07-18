@@ -45,7 +45,7 @@ class ServiceCard extends Component {
   
       this.onLoading();
       this.ServiceCheck
-        .getServices(name)
+        .getServices()
         .then(this.onLoaded)
         .then(this.onErrorFalse)
         .catch(this.onError);

@@ -1,18 +1,16 @@
 import { env } from "./base/env"
 
 class CheckService {
-    _apiBase = `https://${env.JF_API_HOST}/api/`;
-    _apiKey = "no";
     getResourse = async (url) => {
       let res = await fetch(url);
-  
-      var username = env.JF_USERNAME;
-      var password = env.JF_PASSWORD;
-      var host = env.JF_API_HOST;
-      var auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
-      var header = {'Host': `${host}`, 'Authorization': auth};
-      var request = this.request('GET', '/', header);
-
+      if (env.JF_USERNAME) {
+          var username = env.JF_USERNAME;
+          var password = env.JF_PASSWORD;
+          var host = env.JF_API_HOST;
+          var auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
+          var header = {'Host': `${host}`, 'Authorization': auth};
+          var request = this.request('GET', '/', header);
+        }
       if (!res.ok) {
         throw new Error(`Could not fetch ${url}, status: ${res.status}`);
       }
@@ -20,14 +18,14 @@ class CheckService {
       return await res.json();
     };
     
-    getServices = async (name) => {
-      console.log("ss")
+    getServices = async () => {
+      console.log("go go res")
+      console.log(`go go ${process.env.JF_USERNAME}`)
 
-
-      // console.log(request)
-      const res = await this.getResourse(
-        `${this._apiBase}containers`
-      );
+      let res = "..."
+      if (env.JF_API_HOST) {
+        let res = await this.getResourse(`https://${env.JF_API_HOST}/api/containers`);
+      }
       return this._transformOutput(res);
     };
   
