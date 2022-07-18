@@ -1,4 +1,3 @@
-import dotenv from "dotenv"
 import * as rt from "runtypes"
 
 function parseEnv()
@@ -6,7 +5,7 @@ function parseEnv()
 	const ProcessEnv = rt.Record({
 		JF_USERNAME: rt.String,
 		JF_PASSWORD: rt.String,
-		JF_API_HOST: rt.String, 
+		JF_API_HOST: rt.String
 	})
 
 	let env = ProcessEnv.validate(process.env)
@@ -16,11 +15,9 @@ function parseEnv()
 		console.error(env.code)
 		console.error(env.message)
 		console.error(env.details)
-		process.exit(1)
+		// process.exit(1)
 	}
 	return env.value
 }
-
-dotenv.config()
 
 export const env = parseEnv()
