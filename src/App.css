@@ -97,8 +97,8 @@ small {
 }
 
 :root {
-  --card-height: 65vh;
-  --card-width: calc(var(--card-height) / 1.2);
+  --card-height: 50vh;
+  --card-width: calc(var(--card-height) / 1.4);
 }
 
 
@@ -118,7 +118,7 @@ body {
   background: #191c29;
   width: var(--card-width);
   height: var(--card-height);
-  padding: 3px;
+  /* padding: 3px; */
   position: relative;
   border-radius: 20px;
   justify-content: center;

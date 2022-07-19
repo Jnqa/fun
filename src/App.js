@@ -25,6 +25,7 @@ function App() {
         <div style={{minHeight:"72vh"}} className="card">
           <Home/>
         </div>
+        <br/>
       </Router>
   );
 }

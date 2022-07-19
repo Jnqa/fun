@@ -4,6 +4,7 @@ function parseEnv()
 {
 	console.log(`User:${process.env.JF_USERNAME}`)
 	console.log(`Host:${process.env.JF_API_HOST}`)
+	console.log(`Host:${process.env.jf_api_host}`)
 	const ProcessEnv = rt.Record({
 		JF_USERNAME: rt.String,
 		JF_PASSWORD: rt.String,
