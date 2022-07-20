@@ -3,12 +3,12 @@ import * as rt from "runtypes"
 function parseEnv()
 {
 	console.log(`User:${process.env.JF_USERNAME}`)
-	console.log(`Host:${process.env.JF_API_HOST}`)
-	console.log(`Host:${process.env.jf_api_host}`)
+	console.log(`Host:${process.env.REACT_APP_JF_API_HOST}`)
+	console.log(`Host:${process.env.REACT_APP_jf_api_host}`)
 	const ProcessEnv = rt.Record({
-		JF_USERNAME: rt.String,
-		JF_PASSWORD: rt.String,
-		JF_API_HOST: rt.String
+		REACT_APP_JF_USERNAME: rt.String,
+		REACT_APP_JF_PASSWORD: rt.String,
+		REACT_APP_JF_API_HOST: rt.String
 	})
 
 	let env = ProcessEnv.validate(process.env)
