@@ -2,15 +2,15 @@ import { env } from "./base/env"
 
 class CheckService {
     getResourse = async (url) => {
-      let res = await fetch(url);
-      if (env.JF_USERNAME) {
+      if (env.JF_API_HOST) {
           var username = env.JF_USERNAME;
           var password = env.JF_PASSWORD;
           var host = env.JF_API_HOST;
           var auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
           var header = {'Host': `${host}`, 'Authorization': auth};
           var request = this.request('GET', '/', header);
-        }
+      }
+      let res = await fetch(url);
       if (!res.ok) {
         throw new Error(`Could not fetch ${url}, status: ${res.status}`);
       }
@@ -19,9 +19,7 @@ class CheckService {
     };
     
     getServices = async () => {
-      console.log("go go res")
-      console.log(`go go ${process.env.JF_USERNAME}`)
-
+      console.log(`go go ${env.JF_USERNAME}`)
       let res = "..."
       if (env.JF_API_HOST) {
         let res = await this.getResourse(`https://${env.JF_API_HOST}/api/containers`);
