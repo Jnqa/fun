@@ -2,10 +2,10 @@ import { env } from "./base/env"
 
 class CheckService {
     getResourse = async (url) => {
-      if (env.JF_API_HOST) {
-          var username = env.JF_USERNAME;
-          var password = env.JF_PASSWORD;
-          var host = env.JF_API_HOST;
+      if (env.REACT_APP_JF_API_HOST) {
+          var username = env.REACT_APP_JF_USERNAME;
+          var password = env.REACT_APP_JF_PASSWORD;
+          var host = env.REACT_APP_JF_API_HOST;
           var auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
           var header = {'Host': `${host}`, 'Authorization': auth};
           var request = this.request('GET', '/', header);
@@ -19,10 +19,10 @@ class CheckService {
     };
     
     getServices = async () => {
-      console.log(`go go ${env.JF_USERNAME}`)
+      console.log(`go go ${env.REACT_APP_JF_USERNAME}`)
       let res = "..."
-      if (env.JF_API_HOST) {
-        let res = await this.getResourse(`https://${env.JF_API_HOST}/api/containers`);
+      if (env.REACT_APP_JF_API_HOST) {
+        let res = await this.getResourse(`https://${env.REACT_APP_JF_API_HOST}/api/containers`);
       }
       return this._transformOutput(res);
     };
