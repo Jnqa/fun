@@ -9,7 +9,13 @@ class CheckService {
           var auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
           var header = {'Host': `${host}`, 'Authorization': auth};
           var request = this.request('GET', '/', header);
+          console.log(`req: ${request}`)
       }
+      else
+      {
+        console.log("NO host!")
+      }
+
       let res = await fetch(url);
       if (!res.ok) {
         throw new Error(`Could not fetch ${url}, status: ${res.status}`);
@@ -20,10 +26,10 @@ class CheckService {
     
     getServices = async () => {
       console.log(`go go ${env.REACT_APP_JF_USERNAME}`)
-      let res = "..."
       if (env.REACT_APP_JF_API_HOST) {
         let res = await this.getResourse(`https://${env.REACT_APP_JF_API_HOST}/api/containers`);
       }
+      else { let res = "..." }
       return this._transformOutput(res);
     };
   
