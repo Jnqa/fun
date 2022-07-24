@@ -8,7 +8,7 @@ class CheckService {
       var auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
       var header = {'Host': `${host}`, 'Authorization': ${auth}};
       var request = this.request('GET', '/', header);
-      console.log(`req: ${request}`)
+      // console.log(`req: ${request}`)
 
       let res = await fetch(url);
       if (!res.ok) {
