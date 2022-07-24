@@ -2,19 +2,13 @@ import { env } from "./base/env"
 
 class CheckService {
     getResourse = async (url) => {
-      if (env.REACT_APP_JF_API_HOST) {
-          var username = env.REACT_APP_JF_USERNAME;
-          var password = env.REACT_APP_JF_PASSWORD;
-          var host = env.REACT_APP_JF_API_HOST;
-          var auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
-          var header = {'Host': `${host}`, 'Authorization': auth};
-          var request = this.request('GET', '/', header);
-          console.log(`req: ${request}`)
-      }
-      else
-      {
-        console.log("NO host!")
-      }
+      var username = env.REACT_APP_JF_USERNAME;
+      var password = env.REACT_APP_JF_PASSWORD;
+      var host = env.REACT_APP_JF_API_HOST;
+      var auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
+      var header = {'Host': `${host}`, 'Authorization': auth};
+      var request = this.request('GET', '/', header);
+      console.log(`req: ${request}`)
 
       let res = await fetch(url);
       if (!res.ok) {
@@ -26,10 +20,7 @@ class CheckService {
     
     getServices = async () => {
       console.log(`go go ${env.REACT_APP_JF_USERNAME}`)
-      if (env.REACT_APP_JF_API_HOST) {
-        let res = await this.getResourse(`https://${env.REACT_APP_JF_API_HOST}/api/containers`);
-      }
-      else { let res = "..." }
+      let res = await this.getResourse(`https://${env.REACT_APP_JF_API_HOST}/api/containers`);
       return this._transformOutput(res);
     };
   
