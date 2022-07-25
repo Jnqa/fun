@@ -4,23 +4,18 @@ class CheckService {
     getResourse = async (url) => {
       var username = env.REACT_APP_JF_USERNAME;
       var password = env.REACT_APP_JF_PASSWORD;
-      var host = env.REACT_APP_JF_API_HOST;
-      var auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
-      var header = {'Host': `${host}`, 'Authorization': ${auth}};
-      var request = this.request('GET', '/', header);
-      // console.log(`req: ${request}`)
-
-      let res = await fetch(url);
-      if (!res.ok) {
-        throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+      const otherParams={
+        method: 'get', 
+        headers: new Headers({
+          'Authorization': 'Basic '+btoa(username+":"+password)
+        }) 
       }
-  
-      return await res.json();
+      fetch(theUrl, otherParams)
+      .then(data=>{return data.json()})
+      .then(res=>{console.log(res)})
     };
     
     getServices = async () => {
-      console.log(`go go ${env.REACT_APP_JF_USERNAME}`)
-      console.log(`go go ${env.REACT_APP_JF_API_HOST}`)
       let res = await this.getResourse(`https://${env.REACT_APP_JF_API_HOST}/api/containers`);
       return this._transformOutput(res);
     };
