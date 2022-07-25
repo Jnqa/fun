@@ -66,16 +66,26 @@ class ServiceCard extends Component {
       );
     }
   }
-  
   const View = ({ stats }) => {
-    const { output } =
-      stats;
+    // const { output } =
+    //   stats;
+    const { outputDict } =
+    stats;
+    let completeOut = ""
+    if (outputDict) {
+      outputDict.forEach(function(element) {completeOut = completeOut + `\r\n 🔹 ${element.name} - ${element.version}`})
+    }
+    else
+    {
+      completeOut="..."
+    }
+
     return (
-      <>
-        <div>{output}
-        </div>
-      </>
-    );
-  };
+        <>  
+          <div>{completeOut}
+          </div>
+        </>
+      )
+  }
   
   export default ServiceCard;

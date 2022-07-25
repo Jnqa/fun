@@ -1,7 +1,7 @@
 import { env } from "./base/env"
 
 class CheckService {
-    getResourse = async (url) => {
+    getResourse = async (theUrl) => {
       var username = env.REACT_APP_JF_USERNAME;
       var password = env.REACT_APP_JF_PASSWORD;
       const otherParams={
@@ -17,7 +17,7 @@ class CheckService {
     
     getServices = async () => {
       let res = await this.getResourse(`https://${env.REACT_APP_JF_API_HOST}/api/containers`);
-      return this._transformOutput(res);
+      return this._transformOutput(res)
     };
   
     _transformOutput = (res) => {
@@ -25,18 +25,13 @@ class CheckService {
         if (!str) return str;
           return str[0].toUpperCase() + str.slice(1);
       };
-      console.log("SerCheck"+res)
-      console.log("SerCheck c"+res["containers"][0]["name"])
-      let textLine = ""
+      let output = []
       res["containers"].forEach(function(element)
       {   
-          console.log("E: " + element.name)
-          console.log("R: " + element.running)
-          if(element.running) {textLine = textLine+" ✔️"+element.name+"-"+element.version+" ▪️ "}
+          if(element.running) {output.push({"name":`${element.name}`,"version":`${element.version}`})}
       });
-      console.log("TEXT: "+textLine)
       return {
-        output: textLine
+        outputDict: output
       };
     };
   }
