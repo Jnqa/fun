@@ -11,7 +11,7 @@ class CheckService {
         }) 
       }
       fetch(theUrl, otherParams)
-      .then(data=>{return data.json()})
+      .then(res=>{return res})
       .then(res=>{console.log(res)})
     };
     
