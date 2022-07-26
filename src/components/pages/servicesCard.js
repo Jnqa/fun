@@ -78,12 +78,12 @@ class ServiceCard extends Component {
     else
     {
       completeOut="..."
+      // completeOut="🔹 docker-controller - v0.1.333 🔹 jq-fun - v0.2.19 🔹 lk-weatherforecast - v0.1.123"
     }
 
     return (
         <>  
-          <div>{completeOut}
-          </div>
+          {completeOut}
         </>
       )
   }
