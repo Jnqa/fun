@@ -16,8 +16,6 @@ class CheckService {
       } else {
         return await response.json()
       }
-      // return res.text();
-      // return text.json();
     };
     
     getServices = async () => {
