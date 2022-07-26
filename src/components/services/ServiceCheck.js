@@ -7,16 +7,22 @@ class CheckService {
       const otherParams={
         method: 'get', 
         headers: new Headers({
-          'Authorization': 'Basic '+btoa(username+":"+password)
+          'Authorization': 'Basic '+btoa(username+':'+password)
         }) 
       }
-      fetch(theUrl, otherParams)
-      .then(data=>{return data.json()})
-      .then(res=>{console.log(res)})
+      let response = await fetch(theUrl, otherParams)
+      if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+      } else {
+        return await response.json()
+      }
+      // return res.text();
+      // return text.json();
     };
     
     getServices = async () => {
       let res = await this.getResourse(`https://${env.REACT_APP_JF_API_HOST}/api/containers`);
+      console.log(`RES -- : ${res}`)
       return this._transformOutput(res)
     };
   
